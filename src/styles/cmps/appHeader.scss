@@ -1,0 +1,15 @@
+.header{
+    background-color: lightblue;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    .header-btn{
+        background-color: lightblue;
+        border: none;
+        cursor: pointer;
+    }
+}
+.logo{
+    text-decoration: none;
+    color: #212121;
+}
