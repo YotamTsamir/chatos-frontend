@@ -12,7 +12,7 @@ export function userReducer(state = initialState, action) {
         case 'SET_USER':
             return { ...state, user: action.user }
         case 'UPDATE_USER':
-            return { ...state, user: action.user }
+            return { ...state, user: action.updatedUser }
         default:
             return state
     }

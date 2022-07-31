@@ -1,0 +1,13 @@
+.msg-modal{
+    margin-left: 15px;
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    height: 14rem;
+    width: 14rem;
+    border: 1px black solid;
+    .txt-msg{
+        width: 13rem;
+        height: 8rem;
+    }
+}

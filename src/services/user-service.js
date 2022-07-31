@@ -13,7 +13,9 @@ export const userService = {
     getUsers,
     pushNotification,
     getById,
-    // getMiniUser
+    deleteUser,
+    addUser,
+    getMiniUser
 }
 
 window.us = userService
@@ -51,7 +53,13 @@ async function updateUser(user) {
     return await httpService.put(`user/${user._id}`, user)
 }
 
+async function deleteUser(userId) {
+    return await httpService.delete(`user/${userId}`)
+}
 
+async function addUser(userInfo) {
+    return await httpService.put('user/addUser', userInfo)
+}
 
 async function signup(userInfo) {
     await httpService.post('auth/signup', userInfo)
@@ -66,13 +74,10 @@ function getLoggedinUser() {
     return JSON.parse(user || null)
 }
 
-// function getMiniUser(){
-//     let user = (sessionStorage.getItem(STORAGE_KEY_LOGGEDIN)) ? JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN)) : null
-//     if(user) {
-//         user = {_id:user._id,fullname:user.fullname,avatar:user.avatar}
-//     }
-//     return user
-// }
+function getMiniUser(user){
+    const miniUser = {_id:user._id,fullname:user.fullname}
+    return miniUser
+}
 
 
 

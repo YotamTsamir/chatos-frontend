@@ -14,8 +14,10 @@ export function loadUsers() {
 }
 
 export function updateUser(user) {
-    return (dispatch) => {
-        dispatch({ type: 'UPDATE_USER', user })
+    return async (dispatch) => {
+        const updatedUser = await userService.updateUser(user)
+        console.log('from actios',updatedUser);
+        dispatch({ type: 'UPDATE_USER', updatedUser })
     }
 
 }

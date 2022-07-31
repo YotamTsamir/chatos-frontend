@@ -2,4 +2,13 @@
 @import './base/base.scss';
 //CMPS
 @import './cmps/appHeader.scss';
-@import './cmps/login.scss'
+@import './cmps/login.scss';
+@import './cmps/user-preview.scss';
+@import './cmps/options-menu.scss';
+@import './cmps/home-page.scss';
+@import './cmps/msg-modal.scss';
+@import './cmps/msg-preview.scss';
+@import './cmps/friends-list.scss';
+
+//PAGES
+@import './pages/admin.scss'

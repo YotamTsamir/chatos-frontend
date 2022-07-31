@@ -8,7 +8,6 @@ export const useFormRegister = (initialFields, cb) => {
     const handleChange = ({ target }) => {
         const field = target.name
         const value = target.type === 'number' ? (+target.value || '') : target.value
-        
         setFields((prevFields) => ({ ...prevFields, [field]: value }))
     }
 
