@@ -7,11 +7,11 @@ export const UserPreview = ({ user, sendMsg, updateUsers, onAddFriend, onAdmin, 
     const [isMsgModal, setIsMsgModal] = useState(false)
 
     return <div className="user-preview">
-        <h1 className="user-name">{user.fullname}</h1>
+        <p className="user-name">{user.fullname}</p>
         {(onAdmin) && <button onClick={() => setIsOptionsOpen(!isOptionsOpen)} className="options-btn">Options</button>}
         {(onAddFriend) && <button className="btn-common"  onClick={() => onAddFriend(user._id)}>Add friend</button>}
-        {(sendMsg) && <button className="btn-common" onClick={() => setIsMsgModal(!isMsgModal)}>Send messege</button>}
-        {(sendMsg) && <button className="btn-common" onClick={() => onRemoveFriend(user)}>Remove friend</button>}
+        {(sendMsg) && <div className="send-remove-container"><button className="btn-common" onClick={() => setIsMsgModal(!isMsgModal)}>Send messege</button>
+        <button className="btn-common" onClick={() => onRemoveFriend(user)}>Remove friend</button></div>}
         {(isOptionsOpen) && <OptionsMenu updateUsers={updateUsers} user={user} />}
         {(isMsgModal) && <MsgModal setIsMsgModal={setIsMsgModal} toFriend={user} sendMsg={sendMsg} user={user} />}
     </div>

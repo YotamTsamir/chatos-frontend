@@ -2,12 +2,13 @@ body{
     margin: 0;
     color: #212121;
     background-color: #f7f7f7;
+    overflow-x: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 } 
 
 .btn-common{
-    margin-top: 10px;
     border: none;
+    font-size: 14px;
     cursor: pointer;
     background-color: #6bc1e9;
     border-radius: 3px;

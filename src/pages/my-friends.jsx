@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { UserList } from "../cmps/user-list"
+import { socketService, SOCKET_EMIT_SEND_MSG } from "../services/socket.service"
 import { userService } from "../services/user-service"
 import { utilService } from "../services/util.service"
 import { updateUser } from "../store/actions/user.actions"
@@ -33,6 +34,9 @@ export const MyFriends = () => {
     }
 
     const onAddFriend = async (friend) => {
+        const miniUser = userService.getMiniUser(user)
+        const miniFriend = userService.getMiniUser(friend)
+        socketService.emit(SOCKET_EMIT_SEND_MSG,{miniUser,friend})
         user.friends.push(friend)
         dispatch(updateUser(user))
         getFriends()
@@ -64,6 +68,7 @@ export const MyFriends = () => {
             time: new Date()
         }
         friend.msgs.push(newMsg)
+        socketService.emit(SOCKET_EMIT_SEND_MSG,newMsg)
         setIsMsgModal(false)
         await userService.updateUser(friend)
     }

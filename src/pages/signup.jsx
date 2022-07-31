@@ -25,8 +25,16 @@ export const Signup = () => {
 
     }, [])
 
+    const toUpperName = (name) => {
+        const splitName = name.split(" ")
+        const fixedNameArr = splitName.map(name => {return name.charAt(0).toUpperCase() + name.substring(1)})
+        const fixedName = fixedNameArr.join(" ")
+        return fixedName
+    }
+
     const onSignup = async (ev) => {
         ev.preventDefault()
+        newSignup.fullname = toUpperName(newSignup.fullname)
         if (user) {
             userService.addUser(newSignup)
             navigate('/admin')

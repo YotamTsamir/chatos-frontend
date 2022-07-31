@@ -6,7 +6,7 @@ export const MyMsgs = () => {
     const { user } = useSelector((storeState) => storeState.userModule)
 
     return <div className="my-msgs">
-        <h1>I AM MSGS</h1>
+        <p className="my-msgs-header">My messeges:</p>
         <MsgsList msgs={user.msgs} />
     </div>
 }

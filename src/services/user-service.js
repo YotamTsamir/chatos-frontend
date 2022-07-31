@@ -74,8 +74,8 @@ function getLoggedinUser() {
     return JSON.parse(user || null)
 }
 
-function getMiniUser(user){
-    const miniUser = {_id:user._id,fullname:user.fullname}
+function getMiniUser(user) {
+    const miniUser = { _id: user._id, fullname: user.fullname }
     return miniUser
 }
 

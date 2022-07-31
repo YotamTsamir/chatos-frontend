@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { socketService, SOCKET_EMIT_SET_TOPIC, SOCKET_EVENT_SEND_MSG } from './services/socket.service';
 import { Home } from './pages/home';
 import { Login } from './pages/login';
 import { AdminPage } from './pages/admin';
@@ -9,8 +10,40 @@ import { Signup } from './pages/signup';
 import { EditUser } from './pages/edit-user';
 import { MyFriends } from './pages/my-friends';
 import { MyMsgs } from './pages/my-msgs';
+import { AppFooter } from './cmps/app-footer';
+import { ActionSent } from './cmps/action-sent';
+import { Socket } from 'socket.io-client';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const { user } = useSelector((storeState) => storeState.userModule)
+  const [action, setAction] = useState(false)
+  const [msg, setMsg] = useState('')
+
+  useEffect(() => {
+    socketService.emit(SOCKET_EMIT_SET_TOPIC, 'all')
+    socketService.off(SOCKET_EVENT_SEND_MSG);
+    socketService.on(SOCKET_EVENT_SEND_MSG, actionSend);
+    return () => {
+      socketService.off(SOCKET_EVENT_SEND_MSG, actionSend)
+
+    }
+
+  }, [])
+
+  const actionSend = (ev) => {
+    console.log(ev.length);
+    if (ev.friend === user._id) {
+      setMsg(`${ev.miniUser.fullname} had added you as a friend!`)
+    }
+    else if (ev.id) setMsg('Got new messege!')
+    else return
+    setAction(true)
+    setTimeout(() => {
+      setAction(false)
+    }, 1000)
+  }
+
   return (
     <Router>
 
@@ -26,7 +59,10 @@ function App() {
         <Route path='/editUser/:id' element={<EditUser />} />
         <Route path='/admin' element={<AdminPage />} />
       </Routes>
-
+      {action && <ActionSent msg={msg} />}
+      <footer>
+        <AppFooter />
+      </footer>
     </Router>
   );
 }

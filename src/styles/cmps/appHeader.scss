@@ -1,13 +1,23 @@
 .header{
-    background-color: lightblue;
+    background-color: #6bc1e9;
     padding: 15px;
     display: flex;
     justify-content: space-between;
     .header-btn{
-        background-color: lightblue;
+        background-color: #6bc1e9;
         border: none;
         cursor: pointer;
     }
+}
+.footer{
+    position: absolute;
+    z-index: -5;
+    font-size: 14px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    height: 1rem;
+    bottom: 0;
 }
 .logo{
     text-decoration: none;

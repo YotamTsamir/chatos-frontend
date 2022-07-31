@@ -1,13 +1,47 @@
-.msg-modal{
+.msg-modal {
     margin-left: 15px;
+    z-index: 5;
+    font-size: 12px;
+    padding-left: 15px;
+    background-color: rgb(255, 255, 255);
     position: fixed;
     bottom: 20px;
-    left: 0;
+    right: 15px;
     height: 14rem;
     width: 14rem;
     border: 1px black solid;
-    .txt-msg{
-        width: 13rem;
+
+    .txt-msg {
+        width: fit-content;
         height: 8rem;
+        resize: none;
+        background-color: rgb(255, 255, 255);
+        outline: none;
+        border: none;
+        -moz-appearance: none;
+
+        &:active {
+
+            border: none;
+            outline: none;
+        }
+    }
+
+    .send-btn {
+        // transform: translate3d(172px, -27px, 10px);
+    }
+
+    .close-modal {
+        margin-top: 10px;
+        position: absolute;
+        top: -10px;
+        left: 0px;
+        background-color: rgb(255, 255, 255);
+        z-index: -5;
+    }
+
+    p {
+        font-size: 16px;
+        margin: 25px 0 20px 0;
     }
 }

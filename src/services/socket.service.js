@@ -1,6 +1,8 @@
 import io from 'socket.io-client'
 import { userService } from './user-service'
 
+
+export const SOCKET_EVENT_SEND_MSG = 'chat-send-msg'
 export const SOCKET_EVENT_ADD_TASK = 'new task'
 export const SOCKET_EVENT_SET_BOARD = 'set board'
 export const SOCKET_EVEN_SET_USER = 'set user'
