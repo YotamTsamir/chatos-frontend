@@ -23,26 +23,33 @@ export const EditUser = () => {
 
     useEffect(() => {
         (async () => {
-            console.log(params.id);
             const currUser = await userService.getById(params.id)
             setEditedUser(currUser)
         })()
     }, [])
 
     const handleChange = ({ target }) => {
-        console.log(target);
         const field = target.name
         const value = target.type === 'number' ? (+target.value || '') : target.value
-        setEditedUser({...editedUser, [field]:value})
+        setEditedUser({ ...editedUser, [field]: value })
         setFields((prevFields) => ({ ...prevFields, [field]: value }))
+    }
+
+    const toUpperName = (name) => {
+        const splitName = name.split(" ")
+        const fixedNameArr = splitName.map(name => { return name.charAt(0).toUpperCase() + name.substring(1) })
+        const fixedName = fixedNameArr.join(" ")
+        return fixedName
     }
 
     const onEdit = async (ev) => {
         ev.preventDefault()
-        await userService.updateUser(editedUser)
+        const newUser = { ...editedUser }
+        newUser.fullname = toUpperName(newUser.fullname)
+        setEditedUser(newUser)
+        await userService.updateOtherUser(newUser)
         navigate('/admin')
     }
-    console.log(editedUser.username, 'we are editinggggg');
 
     return <div className="login">
         <h1>Edit user</h1>

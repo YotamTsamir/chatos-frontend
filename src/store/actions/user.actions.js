@@ -13,13 +13,25 @@ export function loadUsers() {
     }
 }
 
+export function setDarkMode(isDarkMode) { 
+    return dispatch => {
+        dispatch({type:'SET_DARK_MODE',isDarkMode})
+    }
+}
+
 export function updateUser(user) {
     return async (dispatch) => {
         const updatedUser = await userService.updateUser(user)
-        console.log('from actios',updatedUser);
         dispatch({ type: 'UPDATE_USER', updatedUser })
     }
 
+}
+
+export function loadUser(newUser) {
+    return async (dispatch) => {
+        const user = await userService.getById(newUser._id)
+        dispatch({type:'SET_USER',user})
+    }
 }
 
 export function signup(credentials) {

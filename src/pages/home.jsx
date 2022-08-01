@@ -18,7 +18,7 @@ export const Home = () => {
             <h1>Hello {user.fullname}</h1>
             <div className="home-links">
                 <NavLink to={`friendsList/${user._id}`}> <button className="btn-common friends-link-btn">Go to My friends</button></NavLink>
-                <NavLink to={`myMsgs`}> <button className="btn-common msgs-link-btn">Go to My messeges</button></NavLink>
+                <NavLink to={`myMsgs`}> <button className="btn-common msgs-link-btn">Go to My messages</button></NavLink>
             </div>
         </div>
         }

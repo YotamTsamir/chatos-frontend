@@ -15,7 +15,8 @@ export const userService = {
     getById,
     deleteUser,
     addUser,
-    getMiniUser
+    getMiniUser,
+    updateOtherUser
 }
 
 window.us = userService
@@ -50,6 +51,11 @@ async function logout() {
 
 async function updateUser(user) {
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN, JSON.stringify(user))
+    return await httpService.put(`user/${user._id}`, user)
+}
+
+async function updateOtherUser(user) {
+    console.log(user);
     return await httpService.put(`user/${user._id}`, user)
 }
 

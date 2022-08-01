@@ -13,12 +13,15 @@ import { MyMsgs } from './pages/my-msgs';
 import { AppFooter } from './cmps/app-footer';
 import { ActionSent } from './cmps/action-sent';
 import { Socket } from 'socket.io-client';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { userService } from './services/user-service';
+import { loadUser, login } from './store/actions/user.actions';
 
 function App() {
   const { user } = useSelector((storeState) => storeState.userModule)
   const [action, setAction] = useState(false)
   const [msg, setMsg] = useState('')
+  const dispatch = useDispatch()
 
   useEffect(() => {
     socketService.emit(SOCKET_EMIT_SET_TOPIC, 'all')
@@ -31,17 +34,19 @@ function App() {
 
   }, [])
 
-  const actionSend = (ev) => {
-    console.log(ev.length);
+  const actionSend = async (ev) => {
     if (ev.friend === user._id) {
       setMsg(`${ev.miniUser.fullname} had added you as a friend!`)
     }
-    else if (ev.id) setMsg('Got new messege!')
+    else if (ev.id) setMsg('Got new message!')
     else return
     setAction(true)
     setTimeout(() => {
       setAction(false)
-    }, 1000)
+    }, 2000)
+    dispatch(loadUser(user))
+    // const newUser = await userService.getById(user._id)
+    // dispatch(login(newUser))
   }
 
   return (
@@ -60,9 +65,7 @@ function App() {
         <Route path='/admin' element={<AdminPage />} />
       </Routes>
       {action && <ActionSent msg={msg} />}
-      <footer>
         <AppFooter />
-      </footer>
     </Router>
   );
 }

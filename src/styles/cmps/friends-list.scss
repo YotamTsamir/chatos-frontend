@@ -1,3 +1,29 @@
 .friends-list{
     margin-left: 15px;
+    max-height: 72vh;
+    overflow-y: auto;
+    .h1{
+        margin-top: 0;
+    }
+}
+
+.friends-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.friends-list::-webkit-scrollbar-thumb {
+    background-color: #7f7f7f;
+    border-radius: 10px;
+}
+
+.friends-list::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+.friends-list:hover::-webkit-scrollbar-track {
+    background-color: #f3f3f3;
+}
+
+.friends-list:hover::-webkit-scrollbar-thumb {
+    background-color: #7f7f7f;
 }

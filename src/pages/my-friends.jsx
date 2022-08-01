@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { MsgModal } from "../cmps/msg-modal"
 import { UserList } from "../cmps/user-list"
 import { socketService, SOCKET_EMIT_SEND_MSG } from "../services/socket.service"
 import { userService } from "../services/user-service"
@@ -12,6 +13,8 @@ export const MyFriends = () => {
     const [addFriend, setAddFriend] = useState(false)
     const [users, setUsers] = useState('')
     const [friends, setFriends] = useState('')
+    const [msgModal,setMsgModal] = useState(false)
+    const [msgTo,setMsgTo] = useState('')
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -43,6 +46,11 @@ export const MyFriends = () => {
         getUsersToShow()
     }
 
+    const openMsgModal = (toWho) => {
+        setMsgTo(toWho)
+        setMsgModal(!msgModal)
+    }
+
     const getFriends = async () => {
         const currFriendsUnresolved = user.friends.map(async friend => await userService.getById(friend))
         const currFriendsResolved = await Promise.all(currFriendsUnresolved)
@@ -61,25 +69,28 @@ export const MyFriends = () => {
     const sendMsg = async (ev, friend, msg,setIsMsgModal) => {
         ev.preventDefault()
         const miniSender = userService.getMiniUser(user)
+        console.log(friend);
         const newMsg = {
             id: utilService.getRandomIntInclusive(0, 10000),
             from: miniSender,
             txt: msg.txt,
             time: new Date()
         }
-        friend.msgs.push(newMsg)
+        friend.msgs.unshift(newMsg)
         socketService.emit(SOCKET_EMIT_SEND_MSG,newMsg)
         setIsMsgModal(false)
-        await userService.updateUser(friend)
+        console.log('here2');
+        await userService.updateOtherUser(friend)
     }
 
 
 
     return <div className="friends-list">
         <h1>Friends list</h1>
-        {(user.friends) && <UserList onRemoveFriend={onRemoveFriend} sendMsg={sendMsg} users={friends} />}
+        {(user.friends) && <UserList openMsgModal={openMsgModal} onRemoveFriend={onRemoveFriend} sendMsg={sendMsg} users={friends} />}
         {(!user.friends) && <h1>You have no friends</h1>}
         <button className="btn-common" onClick={() => setAddFriend(!addFriend)}>Add friends</button>
         {(addFriend) && <UserList onAddFriend={onAddFriend} users={users} />}
+       {(msgModal) && <MsgModal setIsMsgModal={setMsgModal}  sendMsg={sendMsg} user={msgTo} />}
     </div>
 }

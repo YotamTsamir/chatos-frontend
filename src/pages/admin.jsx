@@ -24,8 +24,8 @@ export const AdminPage = () => {
 
 
     if (!users) return <h1>Loading...</h1>
-    return <div className="admin-page">
+    return <div className="admin-page friends-list">
         <UserList onAdmin={true} updateUsers={updateUsers} users={users} />
-        <NavLink to='/signup'> <button className="btn-common">Add user</button></NavLink>
+        <NavLink to='/signup'> <button className="btn-common admin-user-add">Add user</button></NavLink>
     </div>
 }

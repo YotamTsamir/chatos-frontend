@@ -26,8 +26,8 @@ export const Login = () => {
         <div className="login">
             <h1>Login to your account</h1>
             <form onSubmit={(ev) => onLogin(ev)} className="login-form" action="">
-                <input {...registerLogin('username')} className="user-input username" placeholder="Username" type="text" />
-                <input {...registerLogin('password')} className="user-input password" placeholder="Password" type="text" />
+                <input {...registerLogin('username')} autoComplete="off" className="user-input username" placeholder="Username" type="text" />
+                <input {...registerLogin('password')} autoComplete="off" className="user-input password" placeholder="Password" type="text" />
                 <button className="login-btn">Login!</button>
             </form>
         </div>

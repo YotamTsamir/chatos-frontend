@@ -34,6 +34,10 @@ export const Signup = () => {
 
     const onSignup = async (ev) => {
         ev.preventDefault()
+        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(newSignup.email)){
+            console.log('not valid email');
+            return
+        }
         newSignup.fullname = toUpperName(newSignup.fullname)
         if (user) {
             userService.addUser(newSignup)
@@ -56,10 +60,10 @@ export const Signup = () => {
             {(user && !editedUser) && <h1>Add acount</h1>}
             {(editedUser) && <h1>Edit user</h1>}
             <form onSubmit={(ev) => onSignup(ev)} className="login-form" action="">
-                <input {...registerSignup('username')} className="user-input username" placeholder="Username" type="text" />
-                <input {...registerSignup('password')} className="user-input password" placeholder="Password" type="text" />
-                <input {...registerSignup('fullname')} className="user-input fullname" placeholder="Fullname" type="text" />
-                <input {...registerSignup('email')} className="user-input email" placeholder="email" type="text" />
+                <input {...registerSignup('username')} autoComplete="off" className="user-input username" placeholder="Username" type="text" />
+                <input {...registerSignup('password')} autoComplete="off" className="user-input password" placeholder="Password" type="text" />
+                <input {...registerSignup('fullname')} autoComplete="off" className="user-input fullname" placeholder="Fullname" type="text" />
+                <input {...registerSignup('email')} autoComplete="off" className="user-input email" placeholder="email" type="text" />
                 <button className="login-btn">Sign up!</button>
             </form>
         </div>

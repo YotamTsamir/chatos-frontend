@@ -4,6 +4,9 @@ body{
     background-color: #f7f7f7;
     overflow-x: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    .dark{
+        background-color: #0c80b6 !important
+    }
 } 
 
 .btn-common{
@@ -19,4 +22,9 @@ body{
     &:active{
         transform: translateY(2px);
     }
+}
+
+.dark{
+    background-color: #053f5a !important;
+    color: white ;
 }

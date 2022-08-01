@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
 
 
 export const MsgPreview = ({ msg }) => {
-    const [sentAt,setSentAt] = useState('')
+    const { isDarkMode } = useSelector((storeState) => storeState.userModule)
+    const [sentAt, setSentAt] = useState('')
     useEffect(() => {
         const timeToShow = new Date(msg.time)
         const date = timeToShow.toDateString()
@@ -13,7 +15,7 @@ export const MsgPreview = ({ msg }) => {
     }, [])
 
     if (!msg && !sentAt) return <h1>Loading...</h1>
-    return <div className="msg-preview">
+    return <div className={`msg-preview ${(isDarkMode) ? 'dark-msg' : ''}`}>
         <p>{msg.from.fullname}</p>
         <p>{msg.txt}</p>
         <p>{sentAt}</p>
